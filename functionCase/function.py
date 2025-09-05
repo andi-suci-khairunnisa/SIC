@@ -1,30 +1,34 @@
+def to_celsius(nilai, dari):
+    if dari == 'C':
+        return nilai
+    elif dari == 'F':
+        return (nilai - 32) * 5/9
+    elif dari == 'K':
+        return nilai - 273.15
+    else:
+        raise ValueError("Skala asal tidak valid! Gunakan C, F, atau K.")
+
+def from_celsius(nilai, ke):
+    if ke == 'C':
+        return nilai
+    elif ke == 'F':
+        return (nilai * 9/5) + 32
+    elif ke == 'K':
+        return nilai + 273.15
+    else:
+        raise ValueError("Skala tujuan tidak valid! Gunakan C, F, atau K.")
+
 def konversi_suhu(nilai, dari, ke):
-  if (dari == 'C') and (ke == 'F'):
-    hasil = (nilai*9/5) + 32
-    print(f"Hasil: {nilai}°C = {hasil:.2f}°F")
+    try:
+        # Step 1: konversi ke Celsius
+        celsius = to_celsius(nilai, dari)
 
-  elif (dari == 'C') and (ke == 'K'):
-    hasil = nilai + 273.15
-    print(f"Hasil: {nilai}°C = {hasil:.2f}°K")
+        # Step 2: konversi dari Celsius ke skala tujuan
+        hasil = from_celsius(celsius, ke)
 
-  elif (dari == 'F') and (ke == 'C'):
-    hasil = (nilai-32)*(5/9)
-    print(f"Hasil: {nilai}°F = {hasil:.2f}°C")
+        print(f"Hasil: {nilai}°{dari} = {hasil:.2f}°{ke}")
 
-  elif (dari == 'F') and (ke == 'K'):
-    hasil = (nilai-32)*(5/9) + 273.15
-    print(f"Hasil: {nilai}°F = {hasil:.2f}°K")
-
-  elif (dari == 'K') and (ke == 'C'):
-    hasil = nilai - 273.15
-    print(f"Hasil: {nilai}°K = {hasil:.2f}°C")
-
-  elif (dari == 'K') and (ke == 'F'):
-    hasil = (nilai - 273.15) * (9/5) +32
-    print(f"Hasil: {nilai}°K = {hasil:.2f}°F")
-
-  else:
-    print("Input yang dimasukkan tidak valid!")
-    
+    except ValueError as e:
+        print(e)
 
 
